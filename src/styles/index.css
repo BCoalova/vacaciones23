@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap');
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol';
+    background-color: #0b091b;
+    color: #ffffff;
+}
+p {
+    margin: 0;
+}
+
+.App {
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+}
+.stack {
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.dateData {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+.dateData P:nth-child(1) {
+    font-family: 'Courier Prime', monospace;
+    font-size: 7rem;
+}
+.dateData P:nth-child(2) {
+    font-size: 3rem;
+}

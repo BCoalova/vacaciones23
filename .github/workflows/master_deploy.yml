@@ -1,0 +1,27 @@
+name: vacas23
+on:
+    push:
+        branches:
+            - master
+jobs:
+    build:
+        env:
+            THE_GH_TOKEN: ${{ secrets.THE_GH_TOKEN }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [14.x]
+        steps:
+            - uses: actions/checkout@v1
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+            - name: Install Packages
+              run: npm install
+            - name: Deploy to GH Pages
+              run: |
+                  git config --global user.email coalovaboris@gmail.com
+                  git config --global user.name bcoalova
+                  git remote set-url origin https://${{secrets.THE_GH_TOKEN}}@github.com/BCoalova/vacaciones23.git
+                  npm run deploy
