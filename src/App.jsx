@@ -1,30 +1,39 @@
-import { useEffect } from 'react'
+import { Container, Paper, ThemeProvider } from '@mui/material'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import { useState } from 'react'
 import { END_OF_WORK_DATE } from './assets/constants/date'
+import CountDown from './components/CountDown'
+import DrawerComp from './components/DrawerComp'
 import useBackCount from './hooks/useBackCount'
+import useBoolean from './hooks/useBoolean'
+import useDarkMode from './hooks/useDarkMode'
+import { themeDark, themeLight } from './styles/theme'
 
 export default function App() {
-    const [intervaleD] = useBackCount(END_OF_WORK_DATE)
+    const [isLight] = useDarkMode(false)
+    const [value, setValue] = useState(END_OF_WORK_DATE)
+    const [isDrawerOpen, makeFalse, makeTrue] = useBoolean(false)
+    const [intervaleD] = useBackCount(value)
+
+    function handleDateChange(value) {
+        setValue(value)
+    }
 
     return (
-        <div className='App'>
-            <div className='stack'>
-                <div className='dateData'>
-                    <p>{intervaleD?.days < 10 ? '0' + intervaleD?.days : intervaleD?.days}</p>
-                    <p>DÍAS</p>
-                </div>
-                <div className='dateData'>
-                    <p>{intervaleD?.hours < 10 ? '0' + intervaleD?.hours : intervaleD?.hours}</p>
-                    <p>HORAS</p>
-                </div>
-                <div className='dateData'>
-                    <p>{intervaleD?.minutes < 10 ? '0' + intervaleD?.minutes : intervaleD?.minutes}</p>
-                    <p>MIN</p>
-                </div>
-                <div className='dateData'>
-                    <p>{intervaleD?.seconds < 10 ? '0' + intervaleD?.seconds : intervaleD?.seconds}</p>
-                    <p>SEG</p>
-                </div>
-            </div>
-        </div>
+        <ThemeProvider theme={isLight ? themeLight : themeDark}>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <Container maxWidth={false} component={Paper} elevation={0} square>
+                    <DrawerComp
+                        value={value}
+                        handleDateChange={handleDateChange}
+                        isDrawerOpen={isDrawerOpen}
+                        makeFalse={makeFalse}
+                        makeTrue={makeTrue}
+                    />
+                    <CountDown intervaleD={intervaleD} />
+                </Container>
+            </LocalizationProvider>
+        </ThemeProvider>
     )
 }
