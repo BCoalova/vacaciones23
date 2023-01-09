@@ -16,7 +16,7 @@ export default function DrawerComp({ value, handleDateChange, isDrawerOpen, make
                 flexWrap='wrap'
                 sx={{ position: 'fixed', right: 24, bottom: 16 }}
             >
-                <Typography>{format(value, 'dd/MM/yyyy hh:mm')}</Typography>
+                <Typography>{format(value, 'dd/MM/yyyy HH:mm')} hs.</Typography>
                 <Divider flexItem color='' />
                 <Button variant='outlined' color='primary' endIcon={<MenuIcon />} onClick={makeTrue}>
                     Cambiar fecha
