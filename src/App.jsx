@@ -5,14 +5,6 @@ import useBackCount from './hooks/useBackCount'
 export default function App() {
     const [intervaleD] = useBackCount(END_OF_WORK_DATE)
 
-    // useEffect(() => {
-    //     // eslint-disable-next-line no-undef
-    //     console.log('intervaleD => ', intervaleD)
-    // }, [intervaleD])
-
-    // // eslint-disable-next-line no-undef
-    // console.log('END_OF_WORK_DATE => ', END_OF_WORK_DATE)
-
     return (
         <div className='App'>
             <div className='stack'>
